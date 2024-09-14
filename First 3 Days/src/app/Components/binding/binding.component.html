@@ -1,0 +1,22 @@
+<div class="container">
+  <div class="text-center">
+    <h2>{{product.name}}</h2>
+    <input type="text" id="name" [(ngModel)]="username" />
+    <span> Name: {{ username }} </span>
+  </div>
+  <div class="text-center">
+    <h2>{{ message }}</h2>
+    <button class="btn btn-success" (click)="handelClick()">EVent Bind</button>
+    <h2>Student Data</h2>
+    <h5>Student ID: {{ studentID }}</h5>
+    <h5>Student Name: {{ studentName }}</h5>
+    <p>Result: {{ resultStatus }}</p>
+    <p>Result: {{ getSudentStatus() }}</p>
+    <button class="btn btn-primary" [disabled]="!result">Add Student</button>
+    <br />
+    <h5 [style.color]="textColor">Text Red</h5>
+    <br />
+    <img [src]="imagePath" width="100px" height="100px" alt="" srcset="" />
+    <p [class.active]="isActive">This is active text</p>
+  </div>
+</div>

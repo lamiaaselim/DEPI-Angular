@@ -1,0 +1,9 @@
+<div class="container">
+  <div class="text-center">
+    <h2 class="py-3">Parent Component</h2>
+    <app-child (childEvent)="messageFromChild=$event" [parentData]="message"></app-child>
+
+    <h3>Data from child to parent</h3>
+    <h4>{{messageFromChild}}</h4>
+  </div>
+</div>

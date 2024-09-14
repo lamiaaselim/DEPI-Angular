@@ -1,0 +1,31 @@
+<h1 class="text-center">Directives</h1>
+
+  <div class="text-center my-2">
+    <h1 *ngIf="isLogin">Welcome User</h1>
+    <button class="btn btn-success" (click)="Login()"> Login</button>
+  </div>
+
+  <div class=" my-2">
+    <ul>
+      <li *ngFor="let item of items"> {{item}}</li>
+    </ul>
+  </div>
+
+
+
+<div class="container">
+  <div class="text-center my-2">
+    <input type="text" [(ngModel)]="name" />
+    <span> Username: {{ name }}</span>
+  </div>
+
+  <div class="text-center my-2">
+    <p [ngClass]="{ special: isSepial, heghlighted: isHeghlighted }">Angular Day 2</p>
+    <button class="btn btn-success" (click)="toggleClass()"> toggle</button>
+  </div>
+
+  <div class="text-center my-2">
+    <!-- <p [ngStyle]="{ property: expression}">Angular Day 2</p> -->
+    <h3 [ngStyle]="{ color: textColor}">Angular Day 2</h3>
+  </div>
+</div>
