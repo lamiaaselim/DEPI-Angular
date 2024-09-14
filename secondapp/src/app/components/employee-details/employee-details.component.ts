@@ -7,13 +7,14 @@ import { employees } from './../../../data/employees';
   templateUrl: './employee-details.component.html',
   styleUrl: './employee-details.component.scss',
 })
+
 export class EmployeeDetailsComponent implements OnInit {
   employees: IEmployee[] = [];
 
-  ngOnInit(): void {
-    this.employees = this.getEmployees(); // Call getEmployees once during initialization
-  }
   getEmployees(): IEmployee[] {
     return employees;
+  }
+  ngOnInit(): void {
+    this.employees = this.getEmployees(); // Call getEmployees once during initialization
   }
 }
