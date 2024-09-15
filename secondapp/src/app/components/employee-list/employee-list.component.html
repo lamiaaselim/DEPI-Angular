@@ -22,4 +22,12 @@
       </tr>
     </tbody>
   </table>
+
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <div *ngIf="errMsg" class="text-danger bg-light text-center">
+        {{errMsg}}
+      </div>
+    </div>
+  </div>
 </div>

@@ -9,7 +9,7 @@ class Engine2 {
 }
 
 class Tiers2 {
-  constructor() {}
+  constructor(tierNum: any) {}
 }
 
 class Car2 {
@@ -22,9 +22,6 @@ class Car2 {
   }
 }
 
-// Now, to create a Car2 object, you need to pass the engineType explicitly.
-const engine = new Engine2('V8');
-const tiers = new Tiers2();
-const car = new Car2(engine, tiers);
+
 
 

@@ -1,21 +1,21 @@
 // Dependency Injection Design Pattern => engineType
 
-class Engine {
-  constructor() {}
-}
+// class Engine {
+//   constructor(engineType:any, engineYear:any) {}
+// }
 
-class Tiers {
-  constructor() {}
-}
+// class Tiers {
+//   constructor() {}
+// }
 
-class Car {
-  engine: any;
-  tiers: any;
-  constructor() {
-    this.engine = new Engine();
-    this.tiers = new Tiers();
-  }
-}
+// class Car {
+//   engine: any;
+//   tiers: any;
+//   constructor() {
+//     this.engine = new Engine();
+//     this.tiers = new Tiers();
+//   }
+// }
 
 // Breaking : ❌❌ Solid Principals
 // Open/Closed Principle (OCP): Open for extension close for Modifications
