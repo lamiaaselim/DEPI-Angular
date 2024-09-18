@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-employee-list',
@@ -11,7 +12,9 @@ export class EmployeeListComponent implements OnInit {
   errMsg: any;
 
   constructor(
-    private employeeService: EmployeeService) {}
+    private employeeService: EmployeeService,
+    private router: Router
+  ) {}
 
   ngOnInit(): void {
     this.employeeService.getAllEmployees().subscribe({
@@ -22,5 +25,9 @@ export class EmployeeListComponent implements OnInit {
         this.errMsg = err;
       },
     });
+  }
+
+  goToEmployeeDetails(id: any) {
+    this.router.navigate(['employee', id]);
   }
 }

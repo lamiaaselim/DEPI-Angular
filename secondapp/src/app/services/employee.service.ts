@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import { IEmployee } from '../../interfaces/IEmployee';
 
 @Injectable({
@@ -19,4 +19,18 @@ export class EmployeeService {
     );
   }
 
+  getOneEmployee(id: number): Observable<IEmployee | undefined> {
+    return this.getAllEmployees().pipe(
+      map((employees: IEmployee[]) => {
+        const oneEmployee = employees.find((e) => +e.id === id);
+        if (!oneEmployee) {
+          throw new Error('Employee not found Error message');
+        }
+        return oneEmployee;
+      }),
+      catchError((err) => {
+        return throwError(() => err.message);
+      })
+    );
+  }
 }

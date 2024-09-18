@@ -17,7 +17,7 @@
         <th scope="row">
           {{ employee.id }}
         </th>
-        <td>{{ employee.name }}</td>
+        <td (click)="goToEmployeeDetails(employee.id)">{{ employee.name }}</td>
       </tr>
     </tbody>
   </table>
