@@ -12,9 +12,10 @@ import { FooterComponent } from './components/footer/footer.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
+import { RegisterComponent } from './components/register/register.component';
 
 @NgModule({
-  declarations: [AppComponent, EmployeeListComponent, EmployeeDetailsComponent, HeaderComponent, FooterComponent, HomeComponent, NotFoundComponent, LoginComponent],
+  declarations: [AppComponent, EmployeeListComponent, EmployeeDetailsComponent, HeaderComponent, FooterComponent, HomeComponent, NotFoundComponent, LoginComponent, RegisterComponent],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [
     provideHttpClient(withInterceptorsFromDi())

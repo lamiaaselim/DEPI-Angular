@@ -1,0 +1,107 @@
+<div class="container">
+  <div class="text-center my-3">
+    <h1 class="text-success">Registration Form</h1>
+    {{ registerForm.value | json }}
+  </div>
+
+  <div class="row py-5">
+    <div class="col-md-8 offset-md-2">
+      <form #registerForm="ngForm" novalidate>
+        <div class="mb-3">
+          <label for="exampleInputName" class="form-label">Name</label>
+          <input
+            [(ngModel)]="userModel.name"
+            name="name"
+            #name="ngModel"
+            type="text"
+            class="form-control"
+            id="exampleInputName"
+            required
+            [class.is-invalid]="name.invalid && name.touched"
+          />
+          <small *ngIf="name.invalid && name.touched" class="text-danger"
+            >Name is required</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPhone" class="form-label">Phone</label>
+          <input
+            [class.is-invalid]="phone.invalid && phone.touched"
+            name="phone"
+            [(ngModel)]="userModel.phone"
+            #phone="ngModel"
+            type="tel"
+            class="form-control"
+            id="exampleInputPhone"
+            required
+            pattern="^\d{11}$"
+          />
+          <div *ngIf="phone.errors && phone.touched">
+            <small *ngIf="phone.errors['required']" class="text-danger"
+              >Phone is required</small
+            >
+            <small *ngIf="phone.errors['pattern']" class="text-danger"
+              >Phone must be 11 digit at least</small
+            >
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputEmail1" class="form-label"
+            >Email address</label
+          >
+          <input
+            [(ngModel)]="userModel.email"
+            required
+            [class.is-invalid]="email.invalid && email.touched"
+            name="email"
+            #email="ngModel"
+            type="email"
+            class="form-control"
+            id="exampleInputEmail1"
+          />
+          <small *ngIf="email.invalid && email.touched" class="text-danger"
+            >Email is required</small
+          >
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputPassword1" class="form-label">Password</label>
+          <input
+            [(ngModel)]="userModel.password"
+            name="password"
+            #password="ngModel"
+            type="password"
+            class="form-control"
+            id="exampleInputPassword1"
+            required
+            [class.is-invalid]="password.invalid && password.touched"
+          />
+          <small
+            *ngIf="password.invalid && password.touched"
+            class="text-danger"
+            >Password is required</small
+          >
+        </div>
+        <div class="mb-3 form-check">
+          <input
+            [(ngModel)]="userModel.isChecked"
+            type="checkbox"
+            class="form-check-input"
+            id="exampleCheck1"
+            name="checked"
+            #isChecked="ngModel"
+          />
+          <label class="form-check-label" for="exampleCheck1"
+            >Remember me
+          </label>
+        </div>
+        <button
+          [disabled]="registerForm.form.invalid"
+          type="submit"
+          class="btn btn-primary"
+        >
+          Submit
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
