@@ -6,7 +6,7 @@
 
   <div class="row py-5">
     <div class="col-md-8 offset-md-2">
-      <form #registerForm="ngForm" novalidate>
+      <form #registerForm="ngForm" novalidate (ngSubmit)="onSubmit()">
         <div class="mb-3">
           <label for="exampleInputName" class="form-label">Name</label>
           <input
