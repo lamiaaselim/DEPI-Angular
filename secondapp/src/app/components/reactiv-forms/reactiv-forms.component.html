@@ -8,15 +8,19 @@
           <label for="exampleInputUserName" class="form-label">Username</label>
           <input
             [class.is-invalid]="
-              registerForm.get('userName')?.touched &&
-              registerForm.get('userName')?.invalid
+              userName?.touched &&
+              userName?.invalid
             "
             formControlName="userName"
             type="text"
             class="form-control"
             id="exampleInputUserName"
           />
-          <small class="text-danger" *ngIf="registerForm.get('userName')?.touched && registerForm.get('userName')?.invalid "> Username is required</small>
+          <div *ngIf="userName?.touched && userName?.invalid">
+            <small class="text-danger" *ngIf="userName?.errors?.['required']" > Username is required </small>
+            <small class="text-danger" *ngIf="userName?.errors?.['minlength']" > Username must be 5 letters at least </small>
+            <small class="text-danger" *ngIf="userName?.errors?.['forbiddenName']" > Username admin is not allowed </small>
+          </div>
         </div>
         <div class="mb-3">
           <label for="exampleInputPass" class="form-label">Password</label>
@@ -36,7 +40,9 @@
             type="password"
             class="form-control"
             id="exampleInputPassword1"
+            [class.is-invalid]="registerForm.errors?.['misMatch']"
           />
+          <small class="text-danger" *ngIf="registerForm.errors?.['misMatch']"> Confirm password must be match with password</small>
         </div>
         <div formGroupName="address" class="mb-3">
           <div class="form-group">
