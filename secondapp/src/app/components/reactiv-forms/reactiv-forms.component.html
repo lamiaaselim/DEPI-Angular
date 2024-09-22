@@ -1,23 +1,62 @@
 <div class="container py-5">
   <h1 class="text-center">Reactive Forms</h1>
+  <p class="text-center">{{ registerForm.value | json }}</p>
   <div class="row">
     <div class="col-md-8 offset-md-2">
-      <form novalidate>
+      <form [formGroup]="registerForm" novalidate>
         <div class="mb-3">
           <label for="exampleInputUserName" class="form-label">Username</label>
-          <input type="text" class="form-control" id="exampleInputUserName" />
+          <input
+            [class.is-invalid]="
+              registerForm.get('userName')?.touched &&
+              registerForm.get('userName')?.invalid
+            "
+            formControlName="userName"
+            type="text"
+            class="form-control"
+            id="exampleInputUserName"
+          />
+          <small class="text-danger" *ngIf="registerForm.get('userName')?.touched && registerForm.get('userName')?.invalid "> Username is required</small>
         </div>
         <div class="mb-3">
           <label for="exampleInputPass" class="form-label">Password</label>
-          <input type="password" class="form-control" id="exampleInputPass" />
+          <input
+            formControlName="password"
+            type="password"
+            class="form-control"
+            id="exampleInputPass"
+          />
         </div>
         <div class="mb-3">
-          <label for="exampleInputPassword1" class="form-label"> Confirm Password</label>
+          <label for="exampleInputPassword1" class="form-label">
+            Confirm Password</label
+          >
           <input
+            formControlName="confirmPassword"
             type="password"
             class="form-control"
             id="exampleInputPassword1"
           />
+        </div>
+        <div formGroupName="address" class="mb-3">
+          <div class="form-group">
+            <label class="form-label"> City</label>
+            <input formControlName="city" type="text" class="form-control" />
+          </div>
+
+          <div>
+            <label class="form-label"> State</label>
+            <input formControlName="state" type="text" class="form-control" />
+          </div>
+
+          <div class="form-group">
+            <label class="form-label"> Postal Code</label>
+            <input
+              formControlName="postalCode"
+              type="text"
+              class="form-control"
+            />
+          </div>
         </div>
         <div class="mb-3 form-check">
           <input type="checkbox" class="form-check-input" id="exampleCheck1" />
@@ -27,7 +66,9 @@
         </div>
         <div class="d-flex justify-content-around">
           <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" class="btn btn-success">get Daata</button>
+          <button type="submit" class="btn btn-success" (click)="getData()">
+            get Daata
+          </button>
         </div>
       </form>
     </div>
