@@ -20,7 +20,8 @@
         </th>
         <td>{{ employee.name }}</td>
         <td class="text-center">
-          <button class="btn btn-info" (click)="goToEmployeeDetails(employee.id)">view Detials</button>
+          <button class="btn btn-info me-3" (click)="goToEditEmployee(employee.id)">Edit Employee Detials</button>
+          <button class="btn btn-danger">Delete</button>
         </td>
       </tr>
     </tbody>
@@ -32,6 +33,6 @@
         {{ errMsg }}
       </div>
     </div>
-
   </div>
+
 </div>

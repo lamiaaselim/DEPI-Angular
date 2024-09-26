@@ -5,7 +5,6 @@ export function ConfirmPasswordValidator(
 ): ValidationErrors | null {
   const password = control.get('password');
   const confirmPassword = control.get('confirmPassword');
-
   // // Check if both controls exist and their values match
   // return password && confirmPassword && password.value !== confirmPassword.value
   //   ? { misMatch: true }

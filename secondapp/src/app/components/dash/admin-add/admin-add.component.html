@@ -1,0 +1,83 @@
+<div class="container py-4 mt-4">
+  <div class="row">
+    <div class="col-md-6 offset-md-3">
+      <h2 class="text-center">Add New Employee</h2>
+
+      <!-- Form for adding an employee -->
+      <form #employeeForm="ngForm" (ngSubmit)="onSubmit(employeeForm)">
+        <div class="form-group mb-3">
+          <label for="name">Employee Name</label>
+          <input
+            type="text"
+            id="name"
+            class="form-control"
+            name="name"
+            [(ngModel)]="employee.name"
+            #name="ngModel"
+            required
+          />
+          <div *ngIf="name.invalid && name.touched" class="text-danger">
+            Name is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            class="form-control"
+            name="email"
+            [(ngModel)]="employee.email"
+            #email="ngModel"
+            required
+            email
+          />
+          <div *ngIf="email.invalid && email.touched" class="text-danger">
+            A valid email is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="position">Position</label>
+          <input
+            type="text"
+            id="position"
+            class="form-control"
+            name="position"
+            [(ngModel)]="employee.position"
+            #position="ngModel"
+            required
+          />
+          <div *ngIf="position.invalid && position.touched" class="text-danger">
+            Position is required.
+          </div>
+        </div>
+
+        <div class="form-group mb-3">
+          <label for="department">Department</label>
+          <input
+            type="text"
+            id="department"
+            class="form-control"
+            name="department"
+            [(ngModel)]="employee.department"
+            #department="ngModel"
+            required
+          />
+          <div *ngIf="department.invalid && department.touched" class="text-danger">
+            Department is required.
+          </div>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary"
+          [disabled]="employeeForm.invalid"
+        >
+          Add Employee
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

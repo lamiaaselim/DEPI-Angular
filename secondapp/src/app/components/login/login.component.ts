@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {
+  FormArray,
   FormBuilder,
   FormControl,
   FormGroup,
@@ -43,6 +44,7 @@ export class LoginComponent implements OnInit {
       userName: ['', [Validators.required, Validators.minLength(3), ForbiddenNameValidator]],
       email: [''],
       subscribe: [false],
+      alternativEmails: this.fb.array([]),
       password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
       address: this.fb.group({
@@ -60,6 +62,19 @@ export class LoginComponent implements OnInit {
   }
   get email() {
     return this.registerationForm.get('email');
+  }
+
+  get alternativEmails() {
+    return this.registerationForm.get('alternativEmails') as FormArray
+  }
+
+
+  addAlternativEmails () {
+    this.alternativEmails.push(this.fb.control(''))
+  }
+
+  deleteInput(index : any) {
+    this.alternativEmails.removeAt(index)
   }
 
   setEmailValidator() {

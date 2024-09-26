@@ -1,0 +1,64 @@
+<div class="container py-5">
+  <h1>Edit Employee Details</h1>
+
+  <div *ngIf="errMsg" class="alert alert-danger">
+    {{ errMsg }}
+  </div>
+
+  <div *ngIf="oneEmployee">
+    <form>
+      <!-- Employee Name -->
+      <div class="mb-3">
+        <label for="employeeName" class="form-label">Name</label>
+        <input
+          type="text"
+          id="employeeName"
+          class="form-control"
+          [(ngModel)]="oneEmployee.name"
+          name="name"
+        />
+      </div>
+
+      <!-- Employee Email -->
+      <div class="mb-3">
+        <label for="employeeEmail" class="form-label">Email</label>
+        <input
+          type="email"
+          id="employeeEmail"
+          class="form-control"
+          [(ngModel)]="oneEmployee.email"
+          name="email"
+        />
+      </div>
+
+      <!-- Employee Position -->
+      <div class="mb-3">
+        <label for="employeePosition" class="form-label">Position</label>
+        <input
+          type="text"
+          id="employeePosition"
+          class="form-control"
+          [(ngModel)]="oneEmployee.position"
+          name="position"
+        />
+      </div>
+
+      <!-- Employee Department -->
+      <div class="mb-3">
+        <label for="employeeDepartment" class="form-label">Department</label>
+        <input
+          type="text"
+          id="employeeDepartment"
+          class="form-control"
+          [(ngModel)]="oneEmployee.department"
+          name="department"
+        />
+      </div>
+
+      <!-- Submit Button -->
+      <button type="submit" class="btn btn-primary">
+        Update Employee
+      </button>
+    </form>
+  </div>
+</div>

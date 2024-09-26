@@ -47,7 +47,7 @@
         </div>
         <div class="mb-3">
           <Label class="form-label">Email</Label>
-          <input type="email" class="form-control" [class.is-invalid]="email?.touched && email?.invalid" />
+          <input formControlName="email" type="email" class="form-control" [class.is-invalid]="email?.touched && email?.invalid" />
           <small class="text-danger" *ngIf="email?.touched && email?.invalid"> Email is required</small>
         </div>
         <div class="mb-3 form-check">
@@ -56,7 +56,16 @@
             >send me new offer
           </label>
         </div>
-        <div class="mb-3">
+        <button class="btn btn-success float-end" (click)="addAlternativEmails()"> add alternativ email</button>
+
+        <div formArrayName="alternativEmails" *ngFor="let email of alternativEmails.controls; let i=index">
+          <label > Alternative No. {{i+1}}</label>
+          <input type="text" class="form-control" [formControlName]="i">
+          <button class="btn btn-danger float-end" (click)="deleteInput(i)">-</button>
+        </div>
+
+
+        <div class="my-3">
           <label for="exampleInputPassword1" class="form-label">Password</label>
           <input
             formControlName="password"

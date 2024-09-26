@@ -33,4 +33,21 @@ export class EmployeeService {
       })
     );
   }
+
+  // Add a new employee (mock example with local file)
+  addEmployee(employee: IEmployee): Observable<IEmployee> {
+    return this.http.post<IEmployee>(this.apiUrl, employee).pipe(
+      catchError((err) => {
+        return throwError(() => new Error(err.message || 'Error adding employee'));
+      })
+    );
+  }
+  
+  editEmployee(employee: IEmployee): Observable<IEmployee> {
+    return this.http.post<IEmployee>(this.apiUrl, employee).pipe(
+      catchError((err) => {
+        return throwError(() => new Error(err.message || 'Error adding employee'));
+      })
+    );
+  }
 }

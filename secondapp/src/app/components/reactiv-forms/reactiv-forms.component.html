@@ -44,6 +44,26 @@
           />
           <small class="text-danger" *ngIf="registerForm.errors?.['misMatch']"> Confirm password must be match with password</small>
         </div>
+
+        <div class="mb-3">
+          <label class="form-label"> Email</label>
+          <input formControlName="email" type="email" class="form-control" [class.is-invalid]="email?.touched && email?.invalid">
+          <small class="text-danger" *ngIf="email?.touched && email?.invalid">Email is required </small>
+        </div>
+        <button class="btn btn-success float-end" (click)="addAlternativeEmail()"> Add Alternative Email</button>
+        <div formArrayName="alternativeEmails" *ngFor="let email of alternativeEmails.controls; let i=index;">
+            <label > No. {{i+1}}</label>
+            <input type="text" class="form-control" [formControlName]="i" >
+            <button class="btn btn-danger float-end" (click)="deleteInput(i)">-</button>
+        </div>
+
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-ckeck-input" id="example2"
+            (click)="setEmailValidators()"
+            formControlName="subscribe">
+            <label for="example2" class="form-check-label"> send me new offer</label>
+        </div>
+
         <div formGroupName="address" class="mb-3">
           <div class="form-group">
             <label class="form-label"> City</label>
