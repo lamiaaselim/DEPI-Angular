@@ -28,6 +28,6 @@ export class ListEmployeeAdminComponent implements OnInit {
   }
 
   goToEditEmployee(id: any) {
-    this.router.navigate(['adminn/edit', id]);
+    this.router.navigate(['admin/edit', id]);
   }
 }

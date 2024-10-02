@@ -1,13 +1,4 @@
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChildFn,
-  CanActivateFn,
-  GuardResult,
-  MaybeAsync,
-  Router,
-  RouterStateSnapshot,
-} from '@angular/router';
+import { CanActivateChildFn, CanActivateFn, Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 import { inject, Injectable } from '@angular/core';
@@ -32,7 +23,7 @@ import { inject, Injectable } from '@angular/core';
 // }
 
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthGuard {
   constructor(private authService: AuthService, private router: Router) {}
