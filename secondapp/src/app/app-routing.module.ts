@@ -6,11 +6,7 @@ import { EmployeeDetailsComponent } from './components/employee-details/employee
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ReactivFormsComponent } from './components/reactiv-forms/reactiv-forms.component';
-import { AdminHomeComponent } from './components/dash/admin-home/admin-home.component';
-import { AdminEditComponent } from './components/dash/admin-edit/admin-edit.component';
-import { AdminAddComponent } from './components/dash/admin-add/admin-add.component';
-import { AdminDashComponent } from './components/dash/admin-dash/admin-dash.component';
+import { ReactivFormsComponent } from './components/reactiv-forms/reactiv-forms.component';;
 import { authChildGuard } from './Guards/auth-guard.service';
 import { HomeAdminComponent } from './components/adminDashboard/home-admin/home-admin.component';
 import { AddEmployeeAdminComponent } from './components/adminDashboard/add-employee-admin/add-employee-admin.component';
@@ -30,7 +26,6 @@ const routes: Routes = [
     { path: 'add', component: AddEmployeeAdminComponent},
     { path: 'edit/:id', component: EditEmployeeAdminComponent },
   ]},
-
 
   // { path: 'admin', component: AdminHomeComponent },
   // { path: 'admin/add', component: AdminAddComponent },

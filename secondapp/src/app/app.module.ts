@@ -19,10 +19,6 @@ import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
 import { ReactivFormsComponent } from './components/reactiv-forms/reactiv-forms.component';
 import { ReactiveFormsModule } from '@angular/forms';
-import { AdminHomeComponent } from './components/dash/admin-home/admin-home.component';
-import { AdminDashComponent } from './components/dash/admin-dash/admin-dash.component';
-import { AdminEditComponent } from './components/dash/admin-edit/admin-edit.component';
-import { AdminAddComponent } from './components/dash/admin-add/admin-add.component';
 import { HomeAdminComponent } from './components/adminDashboard/home-admin/home-admin.component';
 import { AddEmployeeAdminComponent } from './components/adminDashboard/add-employee-admin/add-employee-admin.component';
 import { EditEmployeeAdminComponent } from './components/adminDashboard/edit-employee-admin/edit-employee-admin.component';
@@ -40,10 +36,6 @@ import { ListEmployeeAdminComponent } from './components/adminDashboard/list-emp
     LoginComponent,
     RegisterComponent,
     ReactivFormsComponent,
-    AdminHomeComponent,
-    AdminDashComponent,
-    AdminEditComponent,
-    AdminAddComponent,
     HomeAdminComponent,
     AddEmployeeAdminComponent,
     EditEmployeeAdminComponent,
