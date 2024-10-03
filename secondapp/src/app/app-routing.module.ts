@@ -11,7 +11,8 @@ import { HomeAdminComponent } from './components/adminDashboard/home-admin/home-
 import { AddEmployeeAdminComponent } from './components/adminDashboard/add-employee-admin/add-employee-admin.component';
 import { EditEmployeeAdminComponent } from './components/adminDashboard/edit-employee-admin/edit-employee-admin.component';
 import { ListEmployeeAdminComponent } from './components/adminDashboard/list-employee-admin/list-employee-admin.component';
-import { authGuardGuard } from './Guards/auth-guard.service';
+import { authChildGuard, authGuardGuard } from './Guards/auth-guard.service';
+
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
   { path: 'admin', component: HomeAdminComponent ,
-    canActivateChild: [authGuardGuard],
+    canActivateChild:[authChildGuard],
     children:[
     { path: 'list', component: ListEmployeeAdminComponent},
     { path: 'add', component: AddEmployeeAdminComponent},
