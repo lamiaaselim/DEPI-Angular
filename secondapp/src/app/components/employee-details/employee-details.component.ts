@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeService } from '../../services/employee.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { IEmployee } from '../../../interfaces/IEmployee';
 
 @Component({
   selector: 'app-employee-details',
@@ -8,27 +9,28 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './employee-details.component.scss',
 })
 export class EmployeeDetailsComponent implements OnInit {
-  errMsg: any;
-  oneEmployee: any;
-  employeeId: any;
+  employees: { [key: string]: any } = {};
+  errMsg: string = ''; // Change to string for better type safety
 
   constructor(
     private employeeService: EmployeeService,
-    private activatedRoute: ActivatedRoute
+    private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.employeeId = this.activatedRoute.snapshot.paramMap.get('id');
-
-    this.employeeService.getOneEmployee(+this.employeeId).subscribe({
+    this.employeeService.getAllEmployees().subscribe({
       next: (data) => {
-        console.log(data);
-        this.oneEmployee = data;
+        console.log('Employees data:', data);
+        this.employees = data; // Set the employees object
       },
       error: (err) => {
-        console.log(err);
-        this.errMsg = err;
+        this.errMsg = err; // Handle the error
       },
     });
+  }
+
+
+  goToEditEmployee(id: string): void {
+    this.router.navigate(['admin/edit', id]);
   }
 }

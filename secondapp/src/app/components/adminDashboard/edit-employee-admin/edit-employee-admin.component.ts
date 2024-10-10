@@ -20,7 +20,7 @@ export class EditEmployeeAdminComponent implements OnInit {
   ngOnInit(): void {
     this.employeeId = this.activatedRoute.snapshot.paramMap.get('id');
 
-    this.employeeService.getOneEmployee(+this.employeeId).subscribe({
+    this.employeeService.getOneEmployee(this.employeeId).subscribe({
       next: (data) => {
         console.log(data);
         this.oneEmployee = data;

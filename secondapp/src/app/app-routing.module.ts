@@ -11,43 +11,35 @@ import { HomeAdminComponent } from './components/adminDashboard/home-admin/home-
 import { AddEmployeeAdminComponent } from './components/adminDashboard/add-employee-admin/add-employee-admin.component';
 import { EditEmployeeAdminComponent } from './components/adminDashboard/edit-employee-admin/edit-employee-admin.component';
 import { ListEmployeeAdminComponent } from './components/adminDashboard/list-employee-admin/list-employee-admin.component';
-import { authChildGuard, authGuardGuard } from './Guards/auth-guard.service';
-
+import { authChildrenGuard, authParentGuard } from './Guards/auth.guard';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'employee-list', component: EmployeeListComponent, canActivate:[authGuardGuard] },
+  {
+    path: 'employee-list',
+    component: EmployeeListComponent,
+    canActivate: [authParentGuard],
+  },
   { path: 'reactive-forms', component: ReactivFormsComponent },
   { path: 'employee/:id', component: EmployeeDetailsComponent },
   { path: 'login', component: LoginComponent },
   { path: 'register', component: RegisterComponent },
-  { path: 'admin', component: HomeAdminComponent ,
-    canActivateChild:[authChildGuard],
-    children:[
-    { path: 'list', component: ListEmployeeAdminComponent},
-    { path: 'add', component: AddEmployeeAdminComponent},
-    { path: 'edit/:id', component: EditEmployeeAdminComponent },
-  ]},
-
-  // { path: 'admin', component: AdminHomeComponent },
-  // { path: 'admin/add', component: AdminAddComponent },
-  // { path: 'admin/:id', component: AdminEditComponent },
-  // {
-  //   path: 'admin',
-  //   component: AdminHomeComponent,
-  //   canActivateChild: [authChildGuard],
-  //   children: [
-  //     { path: 'dash', component: AdminDashComponent },
-  //     { path: 'add', component: AdminAddComponent },
-  //     { path: ':id', component: AdminEditComponent },
-  //   ],
-  // },
+  {
+    path: 'admin',
+    component: HomeAdminComponent,
+    canActivateChild: [authChildrenGuard],
+    children: [
+      { path: 'list', component: ListEmployeeAdminComponent },
+      { path: 'add', component: AddEmployeeAdminComponent },
+      { path: 'edit/:id', component: EditEmployeeAdminComponent },
+    ],
+  },
   { path: '**', component: NotFoundComponent },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-exports: [RouterModule],
+  exports: [RouterModule],
 })
 export class AppRoutingModule {}

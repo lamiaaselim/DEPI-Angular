@@ -1,116 +1,87 @@
-import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormBuilder,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
-import { ForbiddenNameValidator } from '../../custom-validations/username.validator';
-import { ConfirmPasswordValidator } from '../../custom-validations/confirmPassword.validator';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
+import { UserService } from '../../services/user.service';
+import { USERModel } from '../../Models/UserModel';
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
-export class LoginComponent implements OnInit {
-  // registerationForm = new FormGroup({
-  //   userName: new FormControl(''),
-  //   password: new FormControl(''),
-  //   confirmPassword: new FormControl(''),
-  //   address: new FormGroup({
-  //     city: new FormControl(''),
-  //     state: new FormControl(''),
-  //     postalCode: new FormControl(''),
-  //   }),
-  // });
+export class LoginComponent {
+  email: string = '';
+  password: string = '';
+  loginError: boolean = false; // To track login failures
 
-  // registerationForm = this.fb.group({
-  //   userName: this.fb.control(''),
-  //   password: this.fb.control(''),
-  //   confirmPassword: this.fb.control(''),
-  //   address: this.fb.group({
-  //     city: this.fb.control(''),
-  //     state: this.fb.control(''),
-  //     postalCode: this.fb.control(''),
-  //   }),
-  // });
+  constructor(private userService: UserService, private router: Router) {}
 
-  registerationForm: FormGroup;
+  onLogin() {
+    this.userService.getAllUsers().subscribe({
+      next: (users: USERModel[]) => {
+        // Find user by email and password
+        const user = Object.values(users).find(
+          (u: USERModel) =>
+            u.email === this.email && u.password === this.password
+        );
 
-  constructor(private fb: FormBuilder) {
-    this.registerationForm = this.fb.group({
-      userName: ['', [Validators.required, Validators.minLength(3), ForbiddenNameValidator]],
-      email: [''],
-      subscribe: [false],
-      alternativEmails: this.fb.array([]),
-      password: ['', Validators.required],
-      confirmPassword: ['', Validators.required],
-      address: this.fb.group({
-        city: [''],
-        state: [''],
-        postalCode: [''],
-      }),
-    }, {
-      validators: [ConfirmPasswordValidator]
-    });
-  }
+        if (user) {
+          // Successful login
+          console.log('Login successful!');
 
-  get userName() {
-    return this.registerationForm.get('userName');
-  }
-  get email() {
-    return this.registerationForm.get('email');
-  }
+          // Generate fake token and set expiration
+          const token = this.generateFakeToken();
+          const expiration = this.generateTokenExpiration(1); // Token expires in 1 hour
 
-  get alternativEmails() {
-    return this.registerationForm.get('alternativEmails') as FormArray
-  }
+          // Save the token and expiration in localStorage
+          localStorage.setItem('authToken', token);
+          localStorage.setItem('tokenExpiration', expiration);
 
-
-  addAlternativEmails () {
-    this.alternativEmails.push(this.fb.control(''))
-  }
-
-  deleteInput(index : any) {
-    this.alternativEmails.removeAt(index)
-  }
-
-  setEmailValidator() {
-    this.registerationForm.get('subscribe')?.valueChanges.subscribe(checkedValue=>
-    {
-      if (checkedValue) {
-        this.email?.setValidators(Validators.required)
-      }else {
-        this.email?.clearValidators();
-      }
-      this.email?.updateValueAndValidity()
-    }
-    );
-  }
-
-  ngOnInit() {}
-
-  getData() {
-    //   this.registerationForm.setValue({
-    //     userName: 'Lamiaa',
-    //     password: '1234',
-    //     confirmPassword: '1234',
-    //     address: {
-    //       city: 'Egypt',
-    //       state: 'United States',
-    //       postalCode: '123',
-    //     }
-    //   });
-    // }
-    this.registerationForm.patchValue({
-      userName: 'Lamiaa',
-      address: {
-        city: 'Egypt',
-        state: 'United States',
-        postalCode: '123',
+          // Navigate to home
+          this.router.navigate(['/home']);
+        } else {
+          // Login failed, show error message
+          this.loginError = true;
+          Swal.fire({
+            title: 'Error!',
+            text: 'Invalid email or password.',
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+          });
+        }
+      },
+      error: (err) => {
+        console.log('Error fetching users:', err);
+        this.loginError = true;
+        Swal.fire({
+          title: 'Error!',
+          text: 'Could not fetch users. Please try again later.',
+          icon: 'error',
+          confirmButtonText: 'OK',
+        });
       },
     });
+  }
+
+  // Generate a random fake token
+  generateFakeToken(): string {
+    return Math.random().toString(36).substring(2) + Date.now().toString(36);
+  }
+
+  // Generate expiration time in ISO string (hours)
+  generateTokenExpiration(hours: number): string {
+    const expirationDate = new Date();
+    expirationDate.setHours(expirationDate.getHours() + hours);
+    return expirationDate.toISOString();
+  }
+
+  // Check if token is expired
+  isTokenExpired(): boolean {
+    const expiration = localStorage.getItem('tokenExpiration');
+    if (expiration) {
+      const expirationDate = new Date(expiration);
+      return expirationDate < new Date();
+    }
+    return true;
   }
 }

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { USERModel } from './UserModel';
 import { UserService } from './../../services/user.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-register',
@@ -10,13 +12,23 @@ import { UserService } from './../../services/user.service';
 export class RegisterComponent {
   userModel = new USERModel('', '', '', '', false);
 
-  constructor(private userService: UserService) {}
+  constructor(private userService: UserService, private router: Router) {}
 
   onSubmit() {
     // console.log(this.userModel)
     this.userService.addUser(this.userModel).subscribe({
-      next: (data) => console.log(data),
-      error: (error) => console.log(error),
+      next: (data) => {
+        this.router.navigate(['/login'])
+      },
+      error: (error) => {
+        console.log(error)
+        Swal.fire({
+          title: 'Error!',
+          text: 'Internal Server Error',
+          icon: 'error',
+          confirmButtonText: 'Try Again',
+        });
+      },
     });
   }
 }

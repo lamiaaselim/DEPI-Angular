@@ -1,23 +1,30 @@
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  loggedIn: boolean = false;
-  constructor( ) { }
+  constructor(private router: Router) {}
 
-  login (){
-    this.loggedIn = true;
+  // Check if the user is authenticated by validating the token
+  isAuthenticated(): boolean {
+    const token = localStorage.getItem('authToken');
+    const expiration = localStorage.getItem('tokenExpiration');
+
+    if (token && expiration) {
+      const expirationDate = new Date(expiration);
+      return expirationDate > new Date(); // Token is valid if expiration is in the future
+    }
+    return false; // No valid token, user is not authenticated
   }
 
-  logOut (){
-    this.loggedIn = false;
-  }
-
-  isAuthenticated (){
-    return this.loggedIn;
+  // Log the user out by clearing the token and navigating to login
+  logout() {
+    localStorage.removeItem('authToken');
+    localStorage.removeItem('tokenExpiration');
+    this.router.navigate(['/login']);
   }
 
 }

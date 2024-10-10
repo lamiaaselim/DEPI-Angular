@@ -27,7 +27,7 @@ export class AddEmployeeAdminComponent {
       this.employeeService.addEmployee(this.employee).subscribe({
         next: () => {
           // Navigate back to the employee list after successful addition
-          this.router.navigate(['/adminn/list']);
+          this.router.navigate(['/admin/list']);
         },
         error: (err) => {
           console.error('Error adding employee:', err);

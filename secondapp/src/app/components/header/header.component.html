@@ -37,14 +37,26 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/login"
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/login"
+            *ngIf="!authService.isAuthenticated()"
             >Login
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLinkActive="active" routerLink="/register"
+          <a
+            class="nav-link"
+            routerLinkActive="active"
+            routerLink="/register"
+            *ngIf="!authService.isAuthenticated()"
             >Register
           </a>
+        </li>
+        <!-- Show 'Logout' if user IS authenticated -->
+        <li class="nav-item" *ngIf="authService.isAuthenticated()">
+          <a class="nav-link" (click)="onLogout()">Logout</a>
         </li>
       </ul>
     </div>
